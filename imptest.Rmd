@@ -1,0 +1,160 @@
+---
+title: "cardknower ETL experimentation"
+output: html_notebook
+---
+
+## notes on differences from deckdater
+
+-   Single-use instead of self-updating cron job pipeline here
+
+    -   Why: convenience/limitations/proof of concept, not a good fit
+        for intended temp host now
+
+-   May concede to mortifying ordeal of denormalization in cases where
+    loading in would be predictably denormalizing anyway? Ugh.
+
+    -   Relatedly: use SQLite for project convenience/simplicity's sake
+
+-   *Do* want detailed mechanical information
+
+-   Do *not* currently need individual users/concept of user or
+    deck/core dating system
+
+    -   May add sample decks to test pretty table rendering once I'm
+        looking for things to do though
+
+-   Primary goal is "look how many fun facts I can visualize"
+
+    -   Secondary goal is "JC look. JC. JC look frontend go brr"
+    -   Tertiary goal is "same as above but 'analytics go brr' for Greg
+        and Dr. Ben instead"
+    -   Quaternary goal is "be more responsible about writing discrete
+        packages, instead of being a horse's ass"
+    -   Quintenary(?) goal is "experiment with more geoms" but it's the
+        lowest priority because I don't actually know if I will need any
+        geoms I don't already know anyway
+
+-   This document is allowed to be Like This because it's the one that
+    only runs for setup once.
+
+## think of packages I want on hand
+
+```{r}
+install.packages("tools") #may or may not need...?
+install.packages("rlang") #do I need rlang...?
+install.packages("devtools")
+install.packages("roxygen")
+install.packages("DBI")
+install.packages("RSQLite")
+install.packages("rvest") #get comprehensive rules
+install.packages("RcppSimdJson") #faster than jsonlite
+install.packages("data.table") #I insist 
+install.packages("shiny") #add golem later?
+install.packages("magrittr") #pipe insurance
+install.packages("forcats") #be responsible herding cats
+install.packages("purrr") #may not need, we'll see
+install.packages("lubridate") #ditto
+
+#ggplot and friends
+install.packages("ggplot2") 
+##...check for redundancy in practice later 
+install.packages("hrbrthemes") 
+install.packages("ggthemes") 
+  #someday I will find aesthetics I like
+install.packages("gganimate")
+install.packages("ggforce")
+install.packages("ggbeeswarm")
+install.packages("ggbump")
+install.packages("ggalluvial")
+install.packages("ggExtra") #marginal plots 
+install.packages("ggpattern") #use card art as backgrounds
+install.packages("ggblur") #Cyrus's Visual Acuity Simulator
+```
+
+## initial database setup
+
+```{sql}
+
+```
+
+### rote lookup tables go here
+
+```{sql}
+
+```
+
+## scrape comprehensive rules
+
+```{r}
+
+```
+
+### keyword-related lookup tables
+
+```{r}
+
+```
+
+## fetch from API endpoint and save to disk
+
+```{r}
+
+```
+
+### fetch images for fun and save
+
+```{r}
+
+```
+
+## load and save sets data
+
+```{r}
+
+```
+
+### save as raw in db
+
+```{r}
+
+```
+
+## load main card data for wrangling
+
+```{r}
+
+```
+
+### save as raw in db
+
+```{r}
+
+```
+
+## load translation data for wrangling
+
+```{r}
+
+```
+
+### save as raw in db
+
+```{r}
+
+```
+
+## write lang lookup table
+
+```{r}
+
+```
+
+## database transforms from here
+
+```{r}
+
+```
+
+## note
+
+In theory this is the point where I should move on to another document and in practice whether I start experimenting with what analytics batches should look like here or elsewhere is inevitably going to depend just on whether we've hit enough lines of code that it's hard to scroll up and down yet or not.
