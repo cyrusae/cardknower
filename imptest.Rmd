@@ -44,24 +44,30 @@ install.packages("tools") #may or may not need...?
 install.packages("rlang") #do I need rlang...?
 install.packages("devtools")
 install.packages("roxygen")
+
 install.packages("DBI")
 install.packages("RSQLite")
 install.packages("rvest") #get comprehensive rules
 install.packages("RcppSimdJson") #faster than jsonlite
+
 install.packages("data.table") #I insist 
-install.packages("shiny") #add golem later?
+install.packages("shiny") 
+install.packages("golem")
 install.packages("magrittr") #pipe insurance
 install.packages("forcats") #be responsible herding cats
 install.packages("purrr") #may not need, we'll see
 install.packages("lubridate") #ditto
+install.packages("formattable")
 
 #ggplot and friends
 install.packages("ggplot2") 
+install.packages("ggx") #syntax reminders/I think it's adorable
 ##...check for redundancy in practice later 
 install.packages("hrbrthemes") 
 install.packages("ggthemes") 
-  #someday I will find aesthetics I like
+  #someday I will find aesthetics I like. I swear
 install.packages("gganimate")
+install.packages("ggimage") #use mana/set symbols as points
 install.packages("ggforce")
 install.packages("ggbeeswarm")
 install.packages("ggbump")
