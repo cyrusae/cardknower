@@ -7,6 +7,7 @@ output: html_notebook
 ```{r}
 library(RcppSimdJson)
 library(data.table)
+
 scry_sets <- RcppSimdJson::fload("https://api.scryfall.com/sets")[[3]]
 bulk_uris <- RcppSimdJson::fload("https://api.scryfall.com/bulk-data")[[3]]
 get_uris <- c("default_cards", "all_cards", "rulings")
@@ -16,6 +17,8 @@ fset <- paste0("scrying/new/raw_csv/", now, "_sets.csv")
 rnames <- paste0("scrying/new/raw_csv/", now, "_", get_uris, ".csv")
 fwrite(scry_sets, fset)
 rm(scry_sets)
+sets <- fread(file = fset) 
+setkey(sets, set_code)
 
 options(timeout = 100000)
 raws <- vector("list", length = 3)
@@ -24,9 +27,10 @@ for (i in seq_along(get_uris)) {
   download.file(bulk_uris[bulk_uris$type == get_uris[i], ]$download_uri, fnames[i])
   raw <- RcppSimdJson::fload(json = fnames[i])
   data.table::fwrite(raw, rnames[i])
-  data.table::raws[[i]] <- fread(file = rnames[i]) |> setkey(oracle_id)
+  data.table::raws[[i]] <- fread(
+    file = rnames[i]) |> setkey(oracle_id)
 }
-rm(fnames, bulk_uris, i)
+rm(fnames, bulk_uris, i, now)
 
 #### TODO: Add first line of verification 
 ##### (check if something exists in /old, check if files are different)
