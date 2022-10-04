@@ -35,4 +35,8 @@ rm(fnames, bulk_uris, i, now)
 #### TODO: Add first line of verification 
 ##### (check if something exists in /old, check if files are different)
 ```
+```{r}
+library(rvest)
+raw_rules <- rvest::read_html("https://mtg.wtf/help/rules") |> html_elements(css = ".rule")
+```
 
